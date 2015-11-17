@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.samoa.instances.Instance;
 import org.apache.samoa.moa.classifiers.core.AttributeSplitSuggestion;
+import org.apache.samoa.moa.core.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

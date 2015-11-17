@@ -50,5 +50,4 @@ final class InactiveLearningNode extends LearningNode {
   double[] getClassVotes(Instance inst, ModelAggregatorProcessor map) {
     return this.observedClassDistribution.getArrayCopy();
   }
-
 }

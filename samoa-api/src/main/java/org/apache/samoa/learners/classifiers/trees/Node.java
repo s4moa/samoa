@@ -94,9 +94,7 @@ abstract class Node implements java.io.Serializable {
     return (observedClassDistribution.numNonZeroEntries() < 2);
   }
 
-  protected void describeSubtree(ModelAggregatorProcessor modelAggrProc, StringBuilder out, int indent) {
-    // TODO: implement method to gracefully define the tree
-  }
+  protected abstract void describeSubtree(ModelAggregatorProcessor modelAggrProc, StringBuilder out, int indent);
 
   // TODO: calculate promise for limiting the model based on the memory size
   // double calculatePromise();

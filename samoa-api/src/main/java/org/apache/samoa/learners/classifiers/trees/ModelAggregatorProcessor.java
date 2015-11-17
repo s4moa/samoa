@@ -78,6 +78,7 @@ final class ModelAggregatorProcessor implements Processor {
   private boolean growthAllowed;
 
   private final Instances dataset;
+  private InstancesHeader ih;
 
   // to support concurrent split
   private long splitId;
@@ -109,7 +110,7 @@ final class ModelAggregatorProcessor implements Processor {
     this.timeOut = builder.timeOut;
     this.changeDetector = builder.changeDetector;
 
-    InstancesHeader ih = new InstancesHeader(dataset);
+    ih = new InstancesHeader(dataset);
     this.setModelContext(ih);
   }
 
@@ -209,6 +210,10 @@ final class ModelAggregatorProcessor implements Processor {
     return newProcessor;
   }
 
+  public String getClassLabelString(int classLabelIndex) {
+    return InstancesHeader.getClassLabelString(ih, classLabelIndex);
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -219,6 +224,10 @@ final class ModelAggregatorProcessor implements Processor {
     sb.append("DecisionNodeCount: ").append(decisionNodeCount);
     sb.append("Growth allowed: ").append(growthAllowed);
     return sb.toString();
+  }
+
+  public void getModelDescription(StringBuilder out, int indent) {
+    this.treeRoot.describeSubtree(this, out, indent);
   }
 
   void setResultStream(Stream resultStream) {
@@ -277,6 +286,10 @@ final class ModelAggregatorProcessor implements Processor {
       while (!contentEventList.isEmpty()) {
         processInstances(contentEventList.remove(0));
       }
+      // print final VHT model
+      StringBuilder out = new StringBuilder();
+      getModelDescription(out, 0);
+      System.out.println(out);
     }
 
   }
@@ -576,6 +589,11 @@ final class ModelAggregatorProcessor implements Processor {
 
     // model context is used to describe the model
     logger.trace("Model context: {}", ih.toString());
+    this.ih = ih;
+  }
+
+  public InstancesHeader getModelContext() {
+    return ih;
   }
 
   private static double computeHoeffdingBound(double range, double confidence, double n) {
@@ -714,5 +732,4 @@ final class ModelAggregatorProcessor implements Processor {
       return new ModelAggregatorProcessor(this);
     }
   }
-
 }

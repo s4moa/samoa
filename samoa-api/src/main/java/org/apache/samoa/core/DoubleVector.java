@@ -86,6 +86,18 @@ public class DoubleVector implements java.io.Serializable {
     return sum;
   }
 
+  public int maxIndex() {
+    double max = Double.MIN_VALUE;
+    int maxIdx = -1;
+    for (int i = 0; i < doubleArray.length; i++) {
+      if (doubleArray[i] > max) {
+        max = doubleArray[i];
+        maxIdx = i;
+      }
+    }
+    return maxIdx;
+  }
+
   public void getSingleLineDescription(StringBuilder out) {
     out.append("{");
     out.append(Doubles.join("|", this.doubleArray));

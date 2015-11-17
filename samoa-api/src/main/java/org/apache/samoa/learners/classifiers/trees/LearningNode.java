@@ -21,6 +21,7 @@ package org.apache.samoa.learners.classifiers.trees;
  */
 
 import org.apache.samoa.instances.Instance;
+import org.apache.samoa.moa.core.StringUtils;
 
 /**
  * Abstract class that represents a learning node
@@ -55,5 +56,15 @@ abstract class LearningNode extends Node {
   protected FoundNode filterInstanceToLeaf(Instance inst, SplitNode parent,
       int parentBranch) {
     return new FoundNode(this, parent, parentBranch);
+  }
+
+  @Override
+  protected void describeSubtree(ModelAggregatorProcessor modelAggrProc, StringBuilder out, int indent) {
+    StringUtils.appendIndented(out, indent, "Leaf ");
+    out.append("Class = ");
+    out.append(modelAggrProc.getClassLabelString(this.observedClassDistribution.maxIndex()));
+    out.append(" weights: ");
+    this.observedClassDistribution.getSingleLineDescription(out);
+    StringUtils.appendNewline(out);
   }
 }
