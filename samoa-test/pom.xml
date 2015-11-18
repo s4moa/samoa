@@ -19,16 +19,19 @@
   #L%
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>samoa</artifactId>
-    <groupId>com.yahoo.labs.samoa</groupId>
-    <version>0.3.0-SNAPSHOT</version>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <name>samoa-test</name>
+  <description>Test suite module for SAMOA</description>
+
   <artifactId>samoa-test</artifactId>
+  <parent>
+    <artifactId>samoa</artifactId>
+    <groupId>org.apache.samoa</groupId>
+    <version>0.4.0-incubating-SNAPSHOT</version>
+  </parent>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -41,7 +44,7 @@
       <version>2.4</version>
     </dependency>
     <dependency>
-      <groupId>com.yahoo.labs.samoa</groupId>
+      <groupId>org.apache.samoa</groupId>
       <artifactId>samoa-api</artifactId>
       <version>${project.version}</version>
     </dependency>
